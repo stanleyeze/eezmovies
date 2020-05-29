@@ -1,6 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+
+// import dotenv from "dotenv";
+// dotenv.config();
+
+console.log(process.env);
 
 function App() {
   return (
