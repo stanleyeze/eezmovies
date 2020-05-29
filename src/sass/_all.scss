@@ -1,0 +1,47 @@
+@import "./forms";
+
+* {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+$font_Tangerine-serif: "Open Sans", sans-serif;
+$font-M: "Montserrat", sans-serif;
+$font-os: "Oswald", sans-serif;
+$font-me: "Merriweather Sans", sans-serif;
+
+@mixin fonts($family) {
+  font-family: $family;
+  // font-size: $size;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  @include fonts($font-me);
+}
+
+.container {
+  margin: 0 auto;
+  max-width: 1280px;
+  width: 90%;
+}
+@media only screen and (min-width: 601px) {
+  .container {
+    width: 90%;
+  }
+}
+@media only screen and (min-width: 993px) {
+  .container {
+    width: 90%;
+  }
+}
+
+body {
+  background-color: #b0bec5;
+  color: white;
+}

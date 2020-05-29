@@ -1,0 +1,15 @@
+.login_section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 3rem;
+}
+
+.form {
+  background-color: #263238;
+  padding: 1em;
+  &_login {
+    width: 30em;
+    padding: 2rem;
+  }
+}
