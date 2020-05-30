@@ -1,10 +1,10 @@
 import React from "react";
 
-export const renderInput = ({ input, meta, label, type, id, placeholder }) => {
+export const renderInput = ({ input, meta, label, type, id }) => {
   const { error, touched } = meta;
   return (
-    <div class="input-field col s6">
-      <i class="material-icons prefix">email</i>
+    <div className="input-field col s6">
+      <i className="material-icons prefix">email</i>
       <input
         {...input}
         type={type}
@@ -59,7 +59,7 @@ export const renderCheckBox = ({ input, label, id }) => {
   );
 };
 
-export const renderSearch = ({ input, meta, onSearch }) => {
+export const renderSearch = ({ input, onSearch }) => {
   if (input.value && input.value !== "") {
     onSearch(input.value);
   }

@@ -1,16 +1,9 @@
-import {
-  SIGN_OUT,
-  SIGN_IN,
-  SESSION_INFO,
-  CONFIRM_SIGN_UP,
-  SIGN_UP,
-} from "./actions";
+import { SIGN_OUT, SIGN_IN, SESSION_INFO, SIGN_UP } from "./actions";
 import { Auth } from "aws-amplify";
 import history from "../history";
 
 //sign up action
 export const confirmSignUp = (username, code) => async (dispatch) => {
-  console.log(username);
   await Auth.confirmSignUp(username, code)
     .then((res) => {
       history.push("/login");
@@ -26,16 +19,22 @@ export const session = () => async (dispatch) => {
     bypassCache: false,
   })
     .then((user) => {
+      console.log(user);
       dispatch({
         type: SESSION_INFO,
         payload: { username: user.username, isSignedIn: true },
       });
     })
-    .catch((err) => console.log(err));
+    .catch((err) => {
+      dispatch({
+        type: SESSION_INFO,
+        payload: { isSignedIn: false },
+      });
+    });
 };
 
 //sign up action
-export const signup = (username, password, attributes) => async (dispatch) => {
+export const signups = (username, password, attributes) => async (dispatch) => {
   await Auth.signUp({
     username,
     password,
@@ -62,13 +61,26 @@ export const signinWithEmailAndPassword = (username, password) => async (
     password,
   })
     .then((res) => {
-      console.log(res);
       dispatch({
         type: SIGN_IN,
-        payload: { username: res.user.username, isSignedIn: true },
+        payload: { username: res.username, isSignedIn: true },
       });
+      window.location = "/";
     })
     .catch((err) => {
       console.log(err, "errorr");
     });
+};
+
+export const logout = () => async (dispatch) => {
+  await Auth.signOut()
+    .then((user) => {
+      console.log(user);
+      dispatch({
+        type: SIGN_OUT,
+      });
+      history.push("/login");
+      window.location.reload();
+    })
+    .catch((err) => console.log(err));
 };

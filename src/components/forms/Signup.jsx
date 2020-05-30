@@ -1,9 +1,9 @@
 import React, { Component } from "react";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
 import { renderInput } from "../utils/formFields";
-import { signup } from "../../actions";
+import { signups } from "../../actions";
 import Button from "../utils/Button";
 
 class SignUpForm extends Component {
@@ -24,13 +24,11 @@ class SignUpForm extends Component {
     };
     this.props.signup(username, password, attributes);
   };
+  UNSAFE_componentWillMount() {}
 
   render() {
-    console.log(this.props.form1);
-    const form2 = { ...this.props.form1 };
-    console.log(form2.email);
     return (
-      <div class="section login_section">
+      <div className="section login_section">
         <div className="z-depth-3 form">
           <div className="form_login">
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -125,15 +123,22 @@ const validate = (formValue) => {
 };
 
 const mapStateToProps = (state) => {
-  const { loginForm } = state.form;
-  if (loginForm && loginForm.values) {
+  if (state.loginForm) {
+    const { loginForm } = state.form;
+    console.log(loginForm);
     return {
       login: state.auth,
       form1: { ...loginForm.values },
     };
+  } else {
+    return {};
   }
 };
 
-export default connect(mapStateToProps, { signup })(
-  reduxForm({ form: "loginForm" })(SignUpForm)
+export default connect(mapStateToProps, { signups })(
+  reduxForm({ form: "signupform", validate })(SignUpForm)
 );
+
+// export default connect(mapStateToProps, {
+//   signinWithEmailAndPassword,
+// })(reduxForm({ form: "loginForm", validate })(LoginForm));

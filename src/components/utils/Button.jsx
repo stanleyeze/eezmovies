@@ -1,8 +1,11 @@
 import React from "react";
 
-const Button = ({ name }) => {
+const Button = ({ name, onClick }) => {
   return (
-    <button class="waves-effect waves-light btn deep-orange accent-3">
+    <button
+      className="waves-effect waves-light btn deep-orange accent-3"
+      onClick={onClick}
+    >
       {name}
     </button>
   );

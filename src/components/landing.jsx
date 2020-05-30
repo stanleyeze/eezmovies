@@ -5,7 +5,7 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
-        <div class="section login_section">
+        <div className="section login_section">
           <div className="z-depth-3 form">
             <SignUpForm />
           </div>

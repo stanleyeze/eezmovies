@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
 
 import { renderInput } from "../utils/formFields";
@@ -57,5 +57,5 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, { confirmSignUp })(
-  reduxForm({ form: "loginForm" })(ConfirmationForm)
+  reduxForm({ form: "confirmationCodeForm", validate })(ConfirmationForm)
 );

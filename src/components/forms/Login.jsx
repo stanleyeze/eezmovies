@@ -1,37 +1,31 @@
 import React, { Component } from "react";
-import { Field, reduxForm, formValueSelector } from "redux-form";
+import { Field, reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import history from "../../history";
 
 import { renderInput } from "../utils/formFields";
 import { signinWithEmailAndPassword } from "../../actions";
 import Button from "../utils/Button";
-import { Auth } from "aws-amplify";
+import history from "../../history";
 
 class LoginForm extends Component {
-  async componentDidMount() {
-    await Auth.currentAuthenticatedUser({
-      bypassCache: false,
-    })
-      .then((user) => {
-        if (user.username) {
-          history.push("/");
-        }
-      })
-      .catch((err) => console.log(err));
-  }
-
   onSubmit = (formValues) => {
     const { username, password } = formValues;
     this.props.signinWithEmailAndPassword(username, password);
   };
 
+  componentDidMount() {
+    const { isSignedIn } = this.props;
+    if (isSignedIn === true) {
+      history.push("/");
+    }
+  }
+
   render() {
-    console.log(this.props.form1);
-    const form2 = { ...this.props.form1 };
-    console.log(form2.email);
+    // const { login } = this.props;
+    // const new_login = { ...login };
+    // console.log(new_login.isSignedIn);
     return (
-      <div class="section login_section">
+      <div className="section login_section">
         <div className="z-depth-3 form">
           <div className="form_login">
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
@@ -79,12 +73,14 @@ const mapStateToProps = (state) => {
   const { loginForm } = state.form;
   if (loginForm && loginForm.values) {
     return {
-      login: state.auth,
+      login: { ...state.login },
       form1: { ...loginForm.values },
     };
+  } else {
+    return {};
   }
 };
 
-export default connect(mapStateToProps, { signinWithEmailAndPassword })(
-  reduxForm({ form: "loginForm" })(LoginForm)
-);
+export default connect(mapStateToProps, {
+  signinWithEmailAndPassword,
+})(reduxForm({ form: "loginForm", validate })(LoginForm));
