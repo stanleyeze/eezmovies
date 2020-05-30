@@ -1,10 +1,10 @@
 import React from "react";
 
-export const renderInput = ({ input, meta, label, type, id }) => {
+export const renderInput = ({ input, meta, label, type, id, icon = "" }) => {
   const { error, touched } = meta;
   return (
     <div className="input-field col s6">
-      <i className="material-icons prefix">email</i>
+      <i className="material-icons prefix">{icon}</i>
       <input
         {...input}
         type={type}

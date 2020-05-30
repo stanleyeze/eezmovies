@@ -21,15 +21,11 @@ class LoginForm extends Component {
   }
 
   render() {
-    // const { login } = this.props;
-    // const new_login = { ...login };
-    // console.log(new_login.isSignedIn);
     return (
       <div className="section login_section">
         <div className="z-depth-3 form">
           <div className="form_login">
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
-              {/* <p>{email}</p> */}
               <Field
                 name="username"
                 label="Username"
@@ -37,6 +33,7 @@ class LoginForm extends Component {
                 type="text"
                 id="username"
                 placeholder="Enter Username"
+                icon="account_circle"
               />
               <Field
                 name="password"
@@ -45,6 +42,7 @@ class LoginForm extends Component {
                 type="password"
                 id="password"
                 placeholder="Enter Password"
+                icon="security"
               />
               <Button name="Login" />
             </form>
@@ -63,7 +61,6 @@ const validate = (formValue) => {
   }
 
   if (!formValue.password) {
-    //something here
     errors.password = "Password field must not be empty";
   }
   return errors;

@@ -20,13 +20,13 @@ class NavBar extends Component {
     const { username, isSignedIn } = login;
     return (
       <React.Fragment>
-        <nav className="blue-grey darken-4">
+        <nav className="blue-grey darken-4 navBar">
           <div className="container">
             <div className="nav-wrapper">
               <Link to="#" className="brand-logo left">
                 <img
-                  src="./img/logo2.png"
-                  style={{ width: "3rem", height: "3rem", marginTop: ".5rem" }}
+                  src="./img/logo5.png"
+                  style={{ width: "5rem", height: "3rem", marginTop: ".5rem" }}
                   alt="logo"
                 />
               </Link>

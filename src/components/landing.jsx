@@ -5,17 +5,26 @@ class LandingPage extends Component {
   render() {
     return (
       <div>
-        <div className="section login_section">
-          <div className="z-depth-3 form">
-            <SignUpForm />
+        <div className="section display_section">
+          <div className="display_section-overlay">
+            <div className="container">
+              <nav>
+                <div class="nav-wrapper">
+                  <form>
+                    <div class="input-field">
+                      <input id="search" type="search" required />
+                      <label class="label-icon" for="search">
+                        <i class="material-icons">search</i>
+                      </label>
+                      <i class="material-icons">close</i>
+                    </div>
+                  </form>
+                </div>
+                <center>Search Movies</center>
+              </nav>
+            </div>
           </div>
         </div>
-        {/* <p>Home</p>
-        <h1>Header 1</h1>
-        <h2>Header 2</h2>
-        <h3>Header 3</h3>
-        <h4>Header 4</h4>
-        <h5>MHeader 5</h5> */}
       </div>
     );
   }

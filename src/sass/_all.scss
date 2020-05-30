@@ -1,4 +1,5 @@
 @import "./forms";
+@import "./sections";
 
 * {
   margin: 0;
@@ -22,7 +23,7 @@ h1,
 h2,
 h3,
 h4 {
-  @include fonts($font-me);
+  @include fonts($font-os);
 }
 
 .container {
@@ -44,4 +45,5 @@ h4 {
 body {
   background-color: #b0bec5;
   color: white;
+  @include fonts($font_Tangerine-serif);
 }

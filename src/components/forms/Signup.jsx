@@ -39,6 +39,7 @@ class SignUpForm extends Component {
                 type="text"
                 id="username"
                 placeholder="Enter Username"
+                icon="account_circle"
               />
               <Field
                 name="firstname"
@@ -47,6 +48,7 @@ class SignUpForm extends Component {
                 type="text"
                 id="firstname"
                 placeholder="Enter Firstname"
+                icon="person"
               />
               <Field
                 name="lastname"
@@ -55,6 +57,7 @@ class SignUpForm extends Component {
                 type="text"
                 id="lastname"
                 placeholder="Enter Lastname"
+                icon="person"
               />
               <Field
                 name="email"
@@ -63,6 +66,7 @@ class SignUpForm extends Component {
                 type="text"
                 id="email"
                 placeholder="Enter Email Address"
+                icon="email"
               />
               <Field
                 name="phone"
@@ -71,6 +75,7 @@ class SignUpForm extends Component {
                 type="tel"
                 id="phone"
                 placeholder="Enter Phone Number"
+                icon="phone"
               />
               <Field
                 name="password"
@@ -79,6 +84,7 @@ class SignUpForm extends Component {
                 type="text"
                 id="password"
                 placeholder="Enter Password"
+                icon="security"
               />
               <Button name="Sign Up" />
             </form>
