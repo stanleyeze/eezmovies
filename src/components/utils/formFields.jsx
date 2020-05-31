@@ -59,21 +59,22 @@ export const renderCheckBox = ({ input, label, id }) => {
   );
 };
 
-export const renderSearch = ({ input, onSearch }) => {
-  if (input.value && input.value !== "") {
-    onSearch(input.value);
-  }
-
+export const renderSearch = ({ input, label, id, type, placeholder }) => {
   return (
     <React.Fragment>
-      <input
-        {...input}
-        className="form-control form-control-sm mr-3 "
-        type="text"
-        placeholder="Search"
-        aria-label="Search"
-      />
-      <i className="fas fa-search" aria-hidden="true"></i>
+      <div class="input-field">
+        <input
+          {...input}
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          required
+        />
+        <label class="label-icon" for="search">
+          <i class="material-icons">{label}</i>
+        </label>
+        <i class="material-icons">close</i>
+      </div>
     </React.Fragment>
   );
 };

@@ -1,26 +1,42 @@
 import React, { Component } from "react";
-import SignUpForm from "./forms/Signup";
+import { Field, reduxForm } from "redux-form";
+import { connect } from "react-redux";
+import { renderSearch } from "./utils/formFields";
 
 class LandingPage extends Component {
+  handleSearch = (formValues) => {
+    const { target } = formValues;
+    //console.log(target.value);
+  };
   render() {
+    const searchString = { ...this.props.form1 };
     return (
       <div>
         <div className="section display_section">
           <div className="display_section-overlay">
             <div className="container">
+              <center>
+                <h5>
+                  {searchString.search} <span>Results found</span>{" "}
+                  <span>next</span>
+                </h5>
+              </center>
               <nav>
                 <div class="nav-wrapper">
                   <form>
-                    <div class="input-field">
-                      <input id="search" type="search" required />
-                      <label class="label-icon" for="search">
-                        <i class="material-icons">search</i>
-                      </label>
-                      <i class="material-icons">close</i>
-                    </div>
+                    <Field
+                      name="search"
+                      label="search"
+                      component={renderSearch}
+                      id="search"
+                      type="search"
+                      onChange={this.handleSearch}
+                      required
+                      icon="account_circle"
+                      placeholder="Search Movies"
+                    />
                   </form>
                 </div>
-                <center>Search Movies</center>
               </nav>
             </div>
           </div>
@@ -30,4 +46,17 @@ class LandingPage extends Component {
   }
 }
 
-export default LandingPage;
+const mapStateToProps = (state) => {
+  const { searchForm } = state.form;
+  if (searchForm && searchForm.values) {
+    return {
+      form1: { ...searchForm.values },
+    };
+  } else {
+    return {};
+  }
+};
+
+export default connect(mapStateToProps)(
+  reduxForm({ form: "searchForm" })(LandingPage)
+);

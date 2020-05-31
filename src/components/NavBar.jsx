@@ -23,7 +23,7 @@ class NavBar extends Component {
         <nav className="blue-grey darken-4 navBar">
           <div className="container">
             <div className="nav-wrapper">
-              <Link to="#" className="brand-logo left">
+              <Link to="/" className="brand-logo left">
                 <img
                   src="./img/logo5.png"
                   style={{ width: "5rem", height: "3rem", marginTop: ".5rem" }}
