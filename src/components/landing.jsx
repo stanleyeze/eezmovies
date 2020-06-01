@@ -1,15 +1,19 @@
 import React, { Component } from "react";
-import { Field, reduxForm } from "redux-form";
+import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { renderSearch } from "./utils/formFields";
+import SearchNavOnSubmit from "./utils/searchNav";
+import { fetchSearchResults } from "../actions/search";
 
 class LandingPage extends Component {
   handleSearch = (formValues) => {
-    const { target } = formValues;
-    //console.log(target.value);
+    const newFormValues = { ...formValues };
+    console.log(newFormValues);
+    this.props.fetchSearchResults([], newFormValues.search);
   };
   render() {
     const searchString = { ...this.props.form1 };
+    console.log(this.props);
     return (
       <div>
         <div className="section display_section">
@@ -23,14 +27,13 @@ class LandingPage extends Component {
               </center>
               <nav>
                 <div class="nav-wrapper">
-                  <form>
+                  <form onSubmit={this.props.handleSubmit(this.handleSearch)}>
                     <Field
                       name="search"
                       label="search"
                       component={renderSearch}
                       id="search"
                       type="search"
-                      onChange={this.handleSearch}
                       required
                       icon="account_circle"
                       placeholder="Search Movies"
@@ -57,6 +60,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps)(
+export default connect(mapStateToProps, { fetchSearchResults })(
   reduxForm({ form: "searchForm" })(LandingPage)
 );

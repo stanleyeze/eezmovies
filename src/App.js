@@ -11,6 +11,7 @@ import LoginForm from "./components/forms/Login";
 import SignUpForm from "./components/forms/Signup";
 import NavBar from "./components/NavBar";
 import Logout from "./components/forms/Logout";
+import Search from "./components/SearchResults";
 
 class App extends Component {
   async componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
           <Switch>
             <Route path="/sign-up/confirmation" component={ConfirmationForm} />
             <Route path="/sign-up" exact component={SignUpForm} />
+            <Route path="/search/:querry/:page" exact component={Search} />
             <Route path="/logout" exact component={Logout} />
             <Route
               path="/login"

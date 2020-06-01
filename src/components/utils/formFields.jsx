@@ -59,7 +59,43 @@ export const renderCheckBox = ({ input, label, id }) => {
   );
 };
 
-export const renderSearch = ({ input, label, id, type, placeholder }) => {
+export const renderSearch = ({
+  input,
+  label,
+  id,
+  type,
+  placeholder,
+  handleSearch,
+}) => {
+  return (
+    <React.Fragment>
+      <div class="input-field">
+        <input
+          {...input}
+          id={id}
+          type={type}
+          placeholder={placeholder}
+          required
+        />
+        <label class="label-icon" for="search">
+          <i class="material-icons">{label}</i>
+        </label>
+        <i class="material-icons">close</i>
+      </div>
+    </React.Fragment>
+  );
+};
+
+export const renderOnChangeSearch = ({
+  input,
+  label,
+  id,
+  type,
+  placeholder,
+  handleSearch,
+}) => {
+  const { onChange } = input;
+  handleSearch(input.value);
   return (
     <React.Fragment>
       <div class="input-field">

@@ -25,7 +25,7 @@ class NavBar extends Component {
             <div className="nav-wrapper">
               <Link to="/" className="brand-logo left">
                 <img
-                  src="./img/logo5.png"
+                  src="/img/logo5.png"
                   style={{ width: "5rem", height: "3rem", marginTop: ".5rem" }}
                   alt="logo"
                 />
