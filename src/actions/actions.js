@@ -7,3 +7,10 @@ export const SIGN_OUT = "SIGN_OUT";
 export const SESSION_INFO = "SESSION_INFO";
 
 export const SEARCH_RESULT = "SEARCH_RESULT";
+
+export const FETCH_VIDEO = "FETCH_VIDEO";
+export const FETCH_RELATED_ITEMS = "FETCH_RELATED_ITEMS";
+
+//common
+export const IS_LOADING = "IS_LOADING";
+export const IS_LOADING = "IS_LOADING";

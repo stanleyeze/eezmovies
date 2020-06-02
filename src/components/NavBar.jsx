@@ -7,7 +7,8 @@ class NavBar extends Component {
   componentDidMount() {
     document.addEventListener("DOMContentLoaded", function () {
       //sidebar trigger
-      document.querySelectorAll(".sidenav");
+      var elems = document.querySelectorAll(".sidenav");
+      M.Sidenav.init(elems, {});
 
       //dropdown trigger
       var elems2 = document.querySelectorAll(".dropdown-trigger");
@@ -23,7 +24,7 @@ class NavBar extends Component {
         <nav className="blue-grey darken-4 navBar">
           <div className="container">
             <div className="nav-wrapper">
-              <Link to="/" className="brand-logo left">
+              <Link to="/" className="brand-logo">
                 <img
                   src="/img/logo5.png"
                   style={{ width: "5rem", height: "3rem", marginTop: ".5rem" }}
@@ -39,8 +40,18 @@ class NavBar extends Component {
               </Link>
               <ul className="right hide-on-med-and-down">
                 <li>
-                  <Link to="badges.html">Home</Link>
+                  <Link to="/movie/popular">All Movies</Link>
                 </li>
+                <li>
+                  <Link to="/movie/popular">Popular</Link>
+                </li>
+                <li>
+                  <Link to="/movie/top-rated">Top Rated</Link>
+                </li>
+                <li>
+                  <Link to="/movie/new">New!</Link>
+                </li>
+
                 <li>
                   <Link to="collapsible.html">API</Link>
                 </li>
@@ -76,6 +87,7 @@ class NavBar extends Component {
           </div>
           {/* login drop down */}
         </nav>
+
         <ul id="dropdown1" className="dropdown-content">
           <li>
             <Link to="#">Profile</Link>

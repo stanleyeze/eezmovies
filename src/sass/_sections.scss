@@ -23,4 +23,20 @@
 }
 .navBar {
   background: linear-gradient(to bottom, #263238 0%, #000000 100%) !important;
+
+  @media only screen and (max-width: 601px) {
+    .container {
+      width: 90%;
+    }
+
+    .brand-logo {
+      display: flex;
+      justify-content: center;
+      align-self: center;
+    }
+  }
+}
+
+.movie_video-desc {
+  padding: 0.5rem;
 }

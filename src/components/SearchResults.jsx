@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
-import SearchNavOnChange from "./utils/searchNav";
 import { fetchSearchResults } from "../actions/search";
+import { fetchVideo } from "../actions/movies";
 import { renderOnChangeSearch } from "./utils/formFields";
 import CardHorizontal from "./utils/CardHorizontal";
 
@@ -13,6 +13,22 @@ class Search extends Component {
       this.props.match.params.querry,
       this.props.match.params.page
     );
+
+    //event listener
+    window.addEventListener("scroll", () => {
+      const scrolable =
+        document.documentElement.scrollHeight - window.innerHeight;
+      const scrolled = window.scrollY;
+
+      if (scrolable === scrolled) {
+        const { fetchSearchResults, searchResult, match } = this.props;
+        const { results, page, total_pages } = searchResult;
+        const querry = match.params.querry;
+        const intPage = parseInt(page);
+        if (page !== total_pages)
+          fetchSearchResults(results, querry, intPage + 1);
+      }
+    });
   }
 
   handleSearch = (formValues) => {
@@ -23,10 +39,13 @@ class Search extends Component {
       this.props.fetchSearchResults([], newSearchSearchForm.values.search, 1);
     }
   };
+
+  handleFetchVideo = (id) => {
+    this.props.fetchVideo(id);
+  };
   render() {
     const { searchResult } = this.props;
     const newSearchResult = { ...searchResult };
-    console.log(newSearchResult.results);
     return (
       <React.Fragment>
         <section className="search_search">
@@ -54,15 +73,17 @@ class Search extends Component {
         </section>
 
         <section className="search_result-grid">
-          <div className="row teal lighten-2">
+          <div className="row ">
             <div className="container">
               {newSearchResult.results &&
               Object.keys(newSearchResult.results).length !== 0
                 ? newSearchResult.results.map((result) => {
-                    result.poster_path ? console.log("yes") : console.log("no");
                     return (
-                      <div class="col s3">
-                        <CardHorizontal result={result} />
+                      <div class="col s6 m4 l3">
+                        <CardHorizontal
+                          handleFetchVideo={this.handleFetchVideo}
+                          result={result}
+                        />
                       </div>
                     );
                   })
@@ -87,6 +108,6 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { fetchSearchResults })(
+export default connect(mapStateToProps, { fetchSearchResults, fetchVideo })(
   reduxForm({ form: "searchSearchForm" })(Search)
 );

@@ -26,6 +26,12 @@ h4 {
   @include fonts($font-os);
 }
 
+.module {
+  width: 250px;
+  overflow: hidden;
+  color: red;
+}
+
 .container {
   margin: 0 auto;
   max-width: 1280px;
@@ -35,6 +41,10 @@ h4 {
   .container {
     width: 90%;
   }
+
+  .brand-logo {
+    float: center;
+  }
 }
 @media only screen and (min-width: 993px) {
   .container {
@@ -42,8 +52,19 @@ h4 {
   }
 }
 
+// .logo {
+//   display: inline-block;
+//   height: 100%;
+// }
+
+// .logo>img {
+//   position: absolute;
+//   top: 50%;
+//   transform: translateY(-50%);
+// }
+
 body {
-  background-color: #b0bec5;
-  color: #b0bec5;
+  background-color: #263238;
+  color: #263238;
   @include fonts($font-M);
 }
