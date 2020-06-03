@@ -12,23 +12,22 @@ class WatchMovie extends Component {
     var pathSplit = _.split(path, "/");
 
     const { fetchVideo, video, fetchRelatedItems, movies } = this.props;
-    const { results, page, total_pages } = movies;
     if (!video.results) fetchVideo(pathSplit[2]);
     fetchRelatedItems([], pathSplit[2], 1);
 
-    //event listener
-    window.addEventListener("scroll", () => {
-      const scrolable =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
+    // //event listener
+    // document.addEventListener("scroll", () => {
+    //   const scrolable =
+    //     document.documentElement.scrollHeight - window.innerHeight;
+    //   const scrolled = window.scrollY;
 
-      if (scrolable === scrolled) {
-        const { fetchRelatedItems, movies } = this.props;
-        const { results, page, total_pages } = movies;
-        if (page !== total_pages)
-          fetchRelatedItems(results, pathSplit[2], page + 1);
-      }
-    });
+    //   if (scrolable === scrolled) {
+    //     const { fetchRelatedItems, movies } = this.props;
+    //     const { results, page, total_pages } = movies;
+    //     if (page !== total_pages)
+    //       fetchRelatedItems(results, pathSplit[2], page + 1);
+    //   }
+    // });
   }
 
   handleFetchVideo = (id) => {
@@ -58,7 +57,7 @@ class WatchMovie extends Component {
             <div className="row">
               <div className="container">
                 <div className="col s2">
-                  <i class="small material-icons">arrow_back</i>
+                  <i class="small material-icons center-align">arrow_back</i>
                 </div>
                 <div className="col s8">Like counts details every here</div>
                 <div className="col s2">Random stuff</div>

@@ -13,6 +13,7 @@ import NavBar from "./components/NavBar";
 import Logout from "./components/forms/Logout";
 import Search from "./components/SearchResults";
 import WatchMovie from "./components/WatchMovie";
+import Movies from "./components/Movies";
 
 class App extends Component {
   async componentDidMount() {
@@ -32,6 +33,7 @@ class App extends Component {
             <Route path="/sign-up" exact component={SignUpForm} />
             <Route path="/search/:querry/:page" exact component={Search} />
             <Route path="/logout" exact component={Logout} />
+            <Route path="/movies/:category" exact component={Movies} />
             <Route
               path="/movie/:id"
               component={() => <WatchMovie isSignedIn={isSignedIn} />}

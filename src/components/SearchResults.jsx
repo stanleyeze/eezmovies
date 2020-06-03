@@ -15,20 +15,21 @@ class Search extends Component {
     );
 
     //event listener
-    window.addEventListener("scroll", () => {
-      const scrolable =
-        document.documentElement.scrollHeight - window.innerHeight;
-      const scrolled = window.scrollY;
 
-      if (scrolable === scrolled) {
-        const { fetchSearchResults, searchResult, match } = this.props;
-        const { results, page, total_pages } = searchResult;
-        const querry = match.params.querry;
-        const intPage = parseInt(page);
-        if (page !== total_pages)
-          fetchSearchResults(results, querry, intPage + 1);
-      }
-    });
+    // document.addEventListener("scroll", () => {
+    //   const scrolable =
+    //     document.documentElement.scrollHeight - window.innerHeight;
+    //   const scrolled = window.scrollY;
+
+    //   if (scrolable === scrolled) {
+    //     const { fetchSearchResults, searchResult, match } = this.props;
+    //     const { results, page, total_pages } = searchResult;
+    //     const querry = match.params.querry;
+    //     const intPage = parseInt(page);
+    //     if (page !== total_pages)
+    //       fetchSearchResults(results, querry, intPage + 1);
+    //   }
+    // });
   }
 
   handleSearch = (formValues) => {
@@ -40,11 +41,19 @@ class Search extends Component {
     }
   };
 
+  handleShowMore = () => {
+    const { fetchSearchResults, searchResult, match } = this.props;
+    const { results, page } = searchResult;
+    const querry = match.params.querry;
+    const intPage = parseInt(page);
+    fetchSearchResults(results, querry, intPage + 1);
+  };
+
   handleFetchVideo = (id) => {
     this.props.fetchVideo(id);
   };
   render() {
-    const { searchResult } = this.props;
+    const { searchResult, loader } = this.props;
     const newSearchResult = { ...searchResult };
     return (
       <React.Fragment>
@@ -88,6 +97,16 @@ class Search extends Component {
                     );
                   })
                 : "No moview is found!!"}
+              <center>
+                {loader && loader.loading ? (
+                  <div class="progress">
+                    <div class="indeterminate"></div>
+                  </div>
+                ) : (
+                  ""
+                )}
+                <button onClick={this.handleShowMore}>Show More</button>
+              </center>
             </div>
           </div>
         </section>
@@ -102,6 +121,7 @@ const mapStateToProps = (state) => {
     return {
       searchForm: newForm,
       searchResult: { ...state.searchResult },
+      loader: state.loader,
     };
   } else {
     return {};

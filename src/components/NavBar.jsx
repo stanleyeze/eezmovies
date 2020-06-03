@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import history from "../history";
+import { fetchAll } from "../actions/index";
 
 class NavBar extends Component {
   componentDidMount() {
@@ -15,6 +17,10 @@ class NavBar extends Component {
       M.Dropdown.init(elems2, { coverTrigger: false });
     });
   }
+
+  handleNavigate = (category) => {
+    this.props.fetchAll([], category, 1);
+  };
 
   render() {
     const { login } = this.props;
@@ -31,30 +37,7 @@ class NavBar extends Component {
                   alt="logo"
                 />
               </Link>
-              <Link
-                to="#"
-                data-target="mobile-demo"
-                className="sidenav-trigger"
-              >
-                <i className="material-icons">menu</i>
-              </Link>
-              <ul className="right hide-on-med-and-down">
-                <li>
-                  <Link to="/movie/popular">All Movies</Link>
-                </li>
-                <li>
-                  <Link to="/movie/popular">Popular</Link>
-                </li>
-                <li>
-                  <Link to="/movie/top-rated">Top Rated</Link>
-                </li>
-                <li>
-                  <Link to="/movie/new">New!</Link>
-                </li>
-
-                <li>
-                  <Link to="collapsible.html">API</Link>
-                </li>
+              <ul className="right">
                 {!isSignedIn ? (
                   <li>
                     <Link
@@ -82,6 +65,44 @@ class NavBar extends Component {
                     </Link>
                   </li>
                 )}
+              </ul>
+              <Link
+                to="#"
+                data-target="mobile-demo"
+                className="sidenav-trigger"
+              >
+                <i className="material-icons">menu</i>
+              </Link>
+              <ul className="right hide-on-med-and-down">
+                <li>
+                  <Link onClick={() => this.handleNavigate("popular")}>
+                    All Movies
+                  </Link>
+                </li>
+                <li>
+                  <Link onClick={() => this.handleNavigate("popular")}>
+                    Popular
+                  </Link>
+                </li>
+                <li>
+                  <Link onClick={() => this.handleNavigate("now_playing")}>
+                    Now Playing
+                  </Link>
+                </li>
+                <li>
+                  <Link onClick={() => this.handleNavigate("popular")}>
+                    New!
+                  </Link>
+                </li>
+                <li>
+                  <Link onClick={() => this.handleNavigate("upcoming")}>
+                    Upcomming
+                  </Link>
+                </li>
+
+                <li>
+                  <Link to="collapsible.html">API</Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -124,4 +145,4 @@ const mapStateToProps = (state) => {
     login: state.login,
   };
 };
-export default connect(mapStateToProps)(NavBar);
+export default connect(mapStateToProps, { fetchAll })(NavBar);

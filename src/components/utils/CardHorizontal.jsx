@@ -43,12 +43,12 @@ const CardHorizontal = ({ result, handleFetchVideo }) => {
           style={{ height: "20rem" }}
         />
         <span class="card-title">Card Title</span>
-        <a
+        <button
           onClick={() => handleFetchVideo(id)}
           class="btn-floating halfway-fab waves-effect waves-light red"
         >
           <i class="material-icons">play_arrow</i>
-        </a>
+        </button>
       </div>
       <div class="card-content hoverable">
         <p style={{ height: "70px", overflow: "hidden" }}>
