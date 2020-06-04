@@ -39,7 +39,7 @@ export const fetchAll = (
     });
 };
 
-export const fetchVideo = (id) => async (dispatch) => {
+export const fetchVideo = (id, movies) => async (dispatch) => {
   //fetches an array of movies that corresponds to the id
   const urlString = `/3/movie/${id}/videos?api_key=${API_KEY}&language=en-US`;
   const path = `/movie/${id}`;
@@ -47,15 +47,14 @@ export const fetchVideo = (id) => async (dispatch) => {
   await themoviedbApi
     .get(urlString)
     .then((res) => {
+      // const results = { ...res.data.results, ...movies };
+      // res.data.results = results;
       dispatch({ type: FETCH_VIDEO, payload: res.data });
       history.push(path);
       dispatch(isNotLoading());
     })
     .catch((err) => {
-      const { status } = err.response;
-      if (status >= 400 && status < 500) {
-        dispatch(isNotLoading());
-      }
+      console.log(err);
     });
 };
 

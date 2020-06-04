@@ -10,7 +10,7 @@
     "dotenv": "^8.2.0",
     "env-cmd": "^10.1.0",
     "lodash": "^4.17.15",
-    "materialize-css": "^1.0.0",
+    "materialize-css": "^1.0.0-rc.2",
     "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

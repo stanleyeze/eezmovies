@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { fetchAll, fetchVideo } from "../actions/index";
-import CardHorizontal from "./utils/CardHorizontal";
+import MovieGrid from "./utils/MovieGrid";
 
 class Movies extends Component {
   async componentDidMount() {
@@ -25,36 +25,12 @@ class Movies extends Component {
     const { movies, loader } = this.props;
     const newMovies = { ...movies };
     return (
-      <React.Fragment>
-        <section className="search_result-grid">
-          <div className="row ">
-            <div className="container">
-              {newMovies.results && Object.keys(newMovies.results).length !== 0
-                ? newMovies.results.map((result) => {
-                    return (
-                      <div class="col s6 m4 l3">
-                        <CardHorizontal
-                          handleFetchVideo={this.handleFetchVideo}
-                          result={result}
-                        />
-                      </div>
-                    );
-                  })
-                : "No moview is found!!"}
-              <center>
-                {loader && loader.loading ? (
-                  <div class="progress">
-                    <div class="indeterminate"></div>
-                  </div>
-                ) : (
-                  ""
-                )}
-                <button onClick={this.handleShowMore}>Show More</button>
-              </center>
-            </div>
-          </div>
-        </section>
-      </React.Fragment>
+      <MovieGrid
+        newMovies={newMovies}
+        handleShowMore={this.handleShowMore}
+        loader={loader}
+        handleFetchVideo={this.handleFetchVideo}
+      />
     );
   }
 }

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import M from "materialize-css";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import history from "../history";
 import { fetchAll } from "../actions/index";
 
 class NavBar extends Component {

@@ -1,0 +1,8 @@
+.mainCard {
+  &_hovers {
+    &-favorite:hover {
+      color: red;
+      cursor: pointer;
+    }
+  }
+}

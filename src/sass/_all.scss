@@ -1,5 +1,7 @@
 @import "./forms";
 @import "./sections";
+@import "./cards";
+@import "./movie-video";
 
 * {
   margin: 0;
@@ -35,11 +37,11 @@ h4 {
 .container {
   margin: 0 auto;
   max-width: 1280px;
-  width: 90%;
+  width: 95% !important;
 }
 @media only screen and (min-width: 601px) {
   .container {
-    width: 90%;
+    width: 95% !important;
   }
 
   .brand-logo {
@@ -48,8 +50,13 @@ h4 {
 }
 @media only screen and (min-width: 993px) {
   .container {
-    width: 90%;
+    width: 95% !important;
   }
+}
+
+.card_icons {
+  display: flex;
+  justify-content: space-between;
 }
 
 // .logo {
@@ -64,7 +71,14 @@ h4 {
 // }
 
 body {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
   background-color: #263238;
   color: #263238;
   @include fonts($font-M);
+}
+
+main {
+  flex: 1 0 auto;
 }

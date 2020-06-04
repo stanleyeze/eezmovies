@@ -14,6 +14,7 @@ import Logout from "./components/forms/Logout";
 import Search from "./components/SearchResults";
 import WatchMovie from "./components/WatchMovie";
 import Movies from "./components/Movies";
+import Footer from "./components/Footer";
 
 class App extends Component {
   async componentDidMount() {
@@ -44,6 +45,7 @@ class App extends Component {
             />
             <Route path="/" exact component={LandingPage} />
           </Switch>
+          <Footer />
         </React.Fragment>
       </div>
     );

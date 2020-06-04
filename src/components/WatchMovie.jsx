@@ -1,10 +1,12 @@
 import React, { Component } from "react";
 import { fetchVideo, fetchRelatedItems } from "../actions/movies";
+import M from "materialize-css";
+import "materialize-css/dist/css/materialize.min.css";
 import { connect } from "react-redux";
 import history from "../history";
 import _ from "lodash";
 
-import CardHorizontal from "./utils/CardHorizontal";
+import MovieGrid from "./utils/MovieGrid";
 
 class WatchMovie extends Component {
   async componentDidMount() {
@@ -15,6 +17,7 @@ class WatchMovie extends Component {
     if (!video.results) fetchVideo(pathSplit[2]);
     fetchRelatedItems([], pathSplit[2], 1);
 
+    M.Tabs.init(this.WatchMovie);
     // //event listener
     // document.addEventListener("scroll", () => {
     //   const scrolable =
@@ -33,9 +36,30 @@ class WatchMovie extends Component {
   handleFetchVideo = (id) => {
     this.props.fetchVideo(id);
   };
+  handleShowMore = () => {
+    const { movies, fetchRelatedItems } = this.props;
+    const { results, page } = movies;
+    const intPage = parseInt(page);
+    const path = history.location.pathname;
+    var pathSplit = _.split(path, "/");
+    fetchRelatedItems(results, pathSplit[2], intPage + 1);
+  };
+
+  handleBack = () => {
+    history.goBack();
+  };
   render() {
-    const { video, movies } = this.props;
+    const { video, movies, loader } = this.props;
     const newMovies = { ...movies };
+    console.log(video.id);
+
+    if (newMovies.results) {
+      const movieWithId = newMovies.results.filter(
+        (movie) => movie.id === "1255"
+      );
+
+      console.log(movieWithId);
+    }
 
     if (video.results) {
       const newVideo = { ...video.results[0] };
@@ -56,51 +80,48 @@ class WatchMovie extends Component {
           <section className="movie_video-desc white-text">
             <div className="row">
               <div className="container">
-                <div className="col s2">
-                  <i class="small material-icons center-align">arrow_back</i>
+                <div className="col s2 center-align movie_video-desc_back">
+                  <i onClick={this.handleBack} class="small material-icons">
+                    arrow_back
+                  </i>
                 </div>
-                <div className="col s8">Like counts details every here</div>
-                <div className="col s2">Random stuff</div>
-              </div>
-            </div>
-          </section>
+                <div className="col s8 center-align movie_video-desc_details">
+                  <ul className="movie_video-desc_details-ul">
+                    <li>
+                      <span>{newVideo.site}</span>
+                    </li>
+                    <li>{newVideo.name}</li>
+                    <li>
+                      {newVideo.size} <span>MiB</span>
+                    </li>
 
-          <section className="movie_video-related white-text">
-            <div className="row">
-              <div className="container">
-                <div className="movie_video-related_header">
-                  <div class="switch">
-                    <span>Related Movies here </span>
-                    <label>
-                      <input type="checkbox" />
-                      <span class="lever"></span>
-                    </label>
-                  </div>
+                    <li>
+                      <i class="material-icons">thumb_up</i>20
+                    </li>
+                  </ul>
+                </div>
+                <div className="col s2 center-align movie_video-desc_others">
+                  <i class="material-icons">more_vert</i>
                 </div>
               </div>
             </div>
           </section>
-          <div className="movie_video-related_content">
-            <section className="search_result-grid">
-              <div className="row ">
-                <div className="container">
-                  {newMovies.results &&
-                  Object.keys(newMovies.results).length !== 0
-                    ? newMovies.results.map((result) => {
-                        return (
-                          <div class="col s6 m4 l3">
-                            <CardHorizontal
-                              handleFetchVideo={this.handleFetchVideo}
-                              result={result}
-                            />
-                          </div>
-                        );
-                      })
-                    : "No moview is found!!"}
-                </div>
-              </div>
-            </section>
+          <div className="row">
+            <div className="container">
+              <h5 className="white-text">Related Movie</h5>
+            </div>
           </div>
+
+          {Object.keys(newMovies.results).length !== 0 ? (
+            <MovieGrid
+              newMovies={newMovies}
+              handleShowMore={this.handleShowMore}
+              loader={loader}
+              handleFetchVideo={this.handleFetchVideo}
+            />
+          ) : (
+            <p className="white-text">"No related movies found"</p>
+          )}
         </React.Fragment>
       );
     } else {
@@ -113,9 +134,12 @@ const mapStateToProps = (state) => {
   return {
     video: state.video,
     movies: state.movies,
+    loader: state.loader,
   };
 };
 export default connect(mapStateToProps, {
   fetchVideo,
   fetchRelatedItems,
 })(WatchMovie);
+
+//https://stackoverflow.com/questions/55069297/materializecss-tabs-are-not-working-with-react-npm-import

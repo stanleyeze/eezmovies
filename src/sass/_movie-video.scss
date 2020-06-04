@@ -1,0 +1,11 @@
+.movie_video {
+  &-desc {
+    padding: 1rem;
+    &_details {
+      &-ul {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+  }
+}
