@@ -74,33 +74,36 @@ class NavBar extends Component {
               </Link>
               <ul className="right hide-on-med-and-down">
                 <li>
-                  <Link onClick={() => this.handleNavigate("popular")}>
+                  <Link to="#" onClick={() => this.handleNavigate("popular")}>
                     All Movies
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={() => this.handleNavigate("popular")}>
+                  <Link to="#" onClick={() => this.handleNavigate("popular")}>
                     Popular
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={() => this.handleNavigate("now_playing")}>
+                  <Link
+                    to="#"
+                    onClick={() => this.handleNavigate("now_playing")}
+                  >
                     Now Playing
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={() => this.handleNavigate("popular")}>
+                  <Link to="#" onClick={() => this.handleNavigate("popular")}>
                     New!
                   </Link>
                 </li>
                 <li>
-                  <Link onClick={() => this.handleNavigate("upcoming")}>
+                  <Link to="#" onClick={() => this.handleNavigate("upcoming")}>
                     Upcomming
                   </Link>
                 </li>
 
                 <li>
-                  <Link to="collapsible.html">API</Link>
+                  <Link to="#">API</Link>
                 </li>
               </ul>
             </div>

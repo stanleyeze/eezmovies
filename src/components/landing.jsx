@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { reduxForm, Field } from "redux-form";
 import { connect } from "react-redux";
 import { renderSearch } from "./utils/formFields";
-import SearchNavOnSubmit from "./utils/searchNav";
 import { fetchSearchResults } from "../actions/search";
 
 class LandingPage extends Component {

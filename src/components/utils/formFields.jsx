@@ -94,7 +94,6 @@ export const renderOnChangeSearch = ({
   placeholder,
   handleSearch,
 }) => {
-  const { onChange } = input;
   handleSearch(input.value);
   return (
     <React.Fragment>

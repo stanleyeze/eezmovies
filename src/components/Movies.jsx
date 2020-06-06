@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
 import { fetchAll, fetchVideo } from "../actions/index";
 import MovieGrid from "./utils/MovieGrid";

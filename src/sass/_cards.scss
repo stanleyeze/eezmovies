@@ -1,8 +1,11 @@
 .mainCard {
   &_hovers {
-    &-favorite:hover {
-      color: red;
-      cursor: pointer;
+    &-icons {
+      padding-top: 0.5rem;
+      &_favorite:hover {
+        color: red;
+        cursor: pointer;
+      }
     }
   }
 }

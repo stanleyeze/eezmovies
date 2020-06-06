@@ -10,13 +10,11 @@ const MovieGrid = ({ newMovies, handleShowMore, loader, handleFetchVideo }) => {
             {newMovies.results && Object.keys(newMovies.results).length !== 0
               ? newMovies.results.map((result) => {
                   return (
-                    <div class="col s6 m4 l3 xl2">
-                      <CardHorizontal
-                        handleFetchVideo={handleFetchVideo}
-                        result={result}
-                        key={newMovies.id}
-                      />
-                    </div>
+                    <CardHorizontal
+                      handleFetchVideo={handleFetchVideo}
+                      result={result}
+                      key={result.id}
+                    />
                   );
                 })
               : "No moview is found!!"}
@@ -25,8 +23,8 @@ const MovieGrid = ({ newMovies, handleShowMore, loader, handleFetchVideo }) => {
         <div className="row">
           <center>
             {loader && loader.loading ? (
-              <div class="progress">
-                <div class="indeterminate"></div>
+              <div className="progress">
+                <div className="indeterminate"></div>
               </div>
             ) : (
               ""

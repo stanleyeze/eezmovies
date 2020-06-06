@@ -3,12 +3,12 @@ import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
-    <footer class="page-footer fooTer">
-      <div class="container">
-        <div class="row">
-          <div class="col l6 s12">
-            <h5 class="white-text">EEZ Trailers</h5>
-            <p class="grey-text text-lighten-4">
+    <footer className="page-footer fooTer">
+      <div className="container">
+        <div className="row">
+          <div className="col l6 s12">
+            <h5 className="white-text">EEZ Trailers</h5>
+            <p className="grey-text text-lighten-4">
               View all movie trailers in the most convinient way
             </p>
             <Link to="/" className="brand-logo">
@@ -19,38 +19,38 @@ const Footer = () => {
               />
             </Link>
           </div>
-          <div class="col l4 offset-l2 s12">
+          <div className="col l4 offset-l2 s12">
             <ul>
               <li>
-                <a class="grey-text text-lighten-3" href="#!">
+                <Link className="grey-text text-lighten-3" to="/">
                   About us
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="grey-text text-lighten-3" href="#!">
+                <Link className="grey-text text-lighten-3" to="/">
                   Policy
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="grey-text text-lighten-3" href="#!">
+                <Link className="grey-text text-lighten-3" to="/">
                   Privacy
-                </a>
+                </Link>
               </li>
               <li>
-                <a class="grey-text text-lighten-3" href="#!">
+                <Link className="grey-text text-lighten-3" to="/">
                   Pontact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
         </div>
       </div>
-      <div class="footer-copyright">
-        <div class="container">
+      <div className="footer-copyright">
+        <div className="container">
           © 2023 Copyright Text
-          <a class="grey-text text-lighten-4 right" href="/">
+          <Link className="grey-text text-lighten-4 right" to="/">
             Owned by: Eze Stanley
-          </a>
+          </Link>
         </div>
       </div>
     </footer>

@@ -13,24 +13,12 @@ class WatchMovie extends Component {
     const path = history.location.pathname;
     var pathSplit = _.split(path, "/");
 
-    const { fetchVideo, video, fetchRelatedItems, movies } = this.props;
+    const { fetchVideo, video, fetchRelatedItems } = this.props;
     if (!video.results) fetchVideo(pathSplit[2]);
     fetchRelatedItems([], pathSplit[2], 1);
 
-    M.Tabs.init(this.WatchMovie);
-    // //event listener
-    // document.addEventListener("scroll", () => {
-    //   const scrolable =
-    //     document.documentElement.scrollHeight - window.innerHeight;
-    //   const scrolled = window.scrollY;
-
-    //   if (scrolable === scrolled) {
-    //     const { fetchRelatedItems, movies } = this.props;
-    //     const { results, page, total_pages } = movies;
-    //     if (page !== total_pages)
-    //       fetchRelatedItems(results, pathSplit[2], page + 1);
-    //   }
-    // });
+    var elems = document.querySelectorAll(".modal");
+    M.Modal.init(elems, {});
   }
 
   handleFetchVideo = (id) => {
@@ -45,20 +33,19 @@ class WatchMovie extends Component {
     fetchRelatedItems(results, pathSplit[2], intPage + 1);
   };
 
+  handleShowDetails = () => {};
+
   handleBack = () => {
     history.goBack();
   };
   render() {
     const { video, movies, loader } = this.props;
     const newMovies = { ...movies };
-    console.log(video.id);
 
     if (newMovies.results) {
-      const movieWithId = newMovies.results.filter(
-        (movie) => movie.id === "1255"
-      );
-
-      console.log(movieWithId);
+      // const movieWithId = newMovies.results.filter(
+      //   (movie) => movie.id === "1255"
+      // );
     }
 
     if (video.results) {
@@ -67,13 +54,14 @@ class WatchMovie extends Component {
       return (
         <React.Fragment>
           <section className="movie_video-video">
-            <div class="video-container">
+            <div className="video-container">
               <iframe
+                title={video.id}
                 width="853"
                 height="480"
                 src={src}
-                frameborder="0"
-                allowfullscreen
+                frameBorder="0"
+                allowFullScreen
               ></iframe>
             </div>
           </section>
@@ -81,27 +69,44 @@ class WatchMovie extends Component {
             <div className="row">
               <div className="container">
                 <div className="col s2 center-align movie_video-desc_back">
-                  <i onClick={this.handleBack} class="small material-icons">
+                  <i onClick={this.handleBack} className="small material-icons">
                     arrow_back
                   </i>
                 </div>
                 <div className="col s8 center-align movie_video-desc_details">
                   <ul className="movie_video-desc_details-ul">
-                    <li>
-                      <span>{newVideo.site}</span>
-                    </li>
                     <li>{newVideo.name}</li>
                     <li>
                       {newVideo.size} <span>MiB</span>
                     </li>
 
                     <li>
-                      <i class="material-icons">thumb_up</i>20
+                      <i className="material-icons">thumb_up</i>20
                     </li>
                   </ul>
                 </div>
                 <div className="col s2 center-align movie_video-desc_others">
-                  <i class="material-icons">more_vert</i>
+                  <a
+                    className="waves-effect waves-light btn modal-trigger"
+                    href="#modal1"
+                  >
+                    <i className="material-icons">more_vert</i>
+                  </a>
+                </div>
+
+                <div id="modal1" className="modal">
+                  <div className="modal-content">
+                    <h4>Modal Header</h4>
+                    <p>A bunch of text</p>
+                  </div>
+                  <div className="modal-footer">
+                    <a
+                      href="#!"
+                      className="modal-close waves-effect waves-green btn-flat"
+                    >
+                      Agree
+                    </a>
+                  </div>
                 </div>
               </div>
             </div>
