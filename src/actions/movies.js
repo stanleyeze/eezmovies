@@ -1,4 +1,9 @@
-import { FETCH_VIDEO, FETCH_RELATED_ITEMS, FETCH_MOVIES } from "./actions";
+import {
+  FETCH_VIDEO,
+  FETCH_RELATED_ITEMS,
+  FETCH_MOVIES,
+  ADD_REMOVE_FAVOURITE,
+} from "./actions";
 import { API_KEY } from "../services/apiKey";
 import themoviedbApi from "../services/themoviedbApi";
 import history from "../history";
@@ -82,4 +87,9 @@ export const fetchRelatedItems = (previous_results, id, page) => async (
         dispatch(isNotLoading());
       }
     });
+};
+
+export const handleAddRemoveFavorite = (favourite) => (dispatch) => {
+  //handles adding and removing favorite movies
+  dispatch({ type: ADD_REMOVE_FAVOURITE, payload: { favourite } });
 };

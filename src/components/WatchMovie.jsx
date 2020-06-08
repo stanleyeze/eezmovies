@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { fetchVideo, fetchRelatedItems } from "../actions/movies";
+import { loginModalClose } from "../actions/common";
 import M from "materialize-css";
 import "materialize-css/dist/css/materialize.min.css";
 import { connect } from "react-redux";
@@ -7,6 +8,7 @@ import history from "../history";
 import _ from "lodash";
 
 import MovieGrid from "./utils/MovieGrid";
+import LoginModal from "./utils/LoginModal";
 
 class WatchMovie extends Component {
   async componentDidMount() {
@@ -33,7 +35,9 @@ class WatchMovie extends Component {
     fetchRelatedItems(results, pathSplit[2], intPage + 1);
   };
 
-  handleShowDetails = () => {};
+  handleCloseModal = () => {
+    this.props.loginModalClose();
+  };
 
   handleBack = () => {
     history.goBack();
@@ -65,7 +69,7 @@ class WatchMovie extends Component {
               ></iframe>
             </div>
           </section>
-          <section className="movie_video-desc white-text">
+          <section className="movie_video-desc blue-grey darken-4">
             <div className="row">
               <div className="container">
                 <div className="col s2 center-align movie_video-desc_back">
@@ -75,12 +79,17 @@ class WatchMovie extends Component {
                 </div>
                 <div className="col s8 center-align movie_video-desc_details">
                   <ul className="movie_video-desc_details-ul">
-                    <li>{newVideo.name}</li>
-                    <li>
-                      {newVideo.size} <span>MiB</span>
+                    <li className="center-items">
+                      <strong>
+                        <span>Favourite</span>
+                      </strong>
+                      <i className="material-icons">favorite_border</i>
+                    </li>
+                    <li className="center-items">
+                      <strong>Size</strong> <span>{newVideo.size}MiB</span>
                     </li>
 
-                    <li>
+                    <li className="center-items">
                       <i className="material-icons">thumb_up</i>20
                     </li>
                   </ul>
@@ -125,12 +134,44 @@ class WatchMovie extends Component {
               handleFetchVideo={this.handleFetchVideo}
             />
           ) : (
-            <p className="white-text">"No related movies found"</p>
+            <div className="row">
+              <div className="container">
+                <p className="white-text">
+                  <em>"0 Item(s) found!"</em>
+                </p>
+              </div>
+            </div>
           )}
+          <LoginModal
+            open={loader.login_modal_open}
+            handleCloseModal={this.handleCloseModal}
+          />
         </React.Fragment>
       );
     } else {
-      return "Loading...";
+      return (
+        <section-loading>
+          <div className="row prelder">
+            <div className="container">
+              <div className="col s12 col-preloader">
+                <div class="preloader-wrapper big active">
+                  <div class="spinner-layer spinner-blue">
+                    <div class="circle-clipper left">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="gap-patch">
+                      <div class="circle"></div>
+                    </div>
+                    <div class="circle-clipper right">
+                      <div class="circle"></div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section-loading>
+      );
     }
   }
 }
@@ -145,6 +186,7 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
   fetchVideo,
   fetchRelatedItems,
+  loginModalClose,
 })(WatchMovie);
 
 //https://stackoverflow.com/questions/55069297/materializecss-tabs-are-not-working-with-react-npm-import

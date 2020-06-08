@@ -30,6 +30,9 @@ class SignUpForm extends Component {
     return (
       <div className="section login_section">
         <div className="z-depth-3 form">
+          <center>
+            <h5>Sign Up</h5>
+          </center>
           <div className="form_login">
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <Field

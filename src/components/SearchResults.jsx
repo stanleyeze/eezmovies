@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { reduxForm, Field } from "redux-form";
+import { reduxForm } from "redux-form";
 import { connect } from "react-redux";
-import { fetchSearchResults } from "../actions/search";
+import { fetchSearchResults, loginModalClose } from "../actions";
 import { fetchVideo } from "../actions/movies";
 import { renderOnChangeSearch } from "./utils/formFields";
-import CardHorizontal from "./utils/CardHorizontal";
+import LoginModal from "./utils/LoginModal";
+import SearchForm from "./utils/SearchForm";
+import MovieGrid from "./utils/MovieGrid";
 
 class Search extends Component {
   async componentDidMount() {
@@ -52,64 +54,34 @@ class Search extends Component {
   handleFetchVideo = (id) => {
     this.props.fetchVideo(id);
   };
+  handleCloseModal = () => {
+    this.props.loginModalClose();
+  };
   render() {
     const { searchResult, loader } = this.props;
     const newSearchResult = { ...searchResult };
     return (
       <React.Fragment>
-        <section className="search_search">
-          <div className="container">
-            <center>
-              <nav>
-                <div class="nav-wrapper">
-                  <form>
-                    <Field
-                      name="search"
-                      label="search"
-                      component={renderOnChangeSearch}
-                      id="search"
-                      type="search"
-                      required
-                      icon="account_circle"
-                      placeholder="Search Movies"
-                      handleSearch={this.handleSearch}
-                    />
-                  </form>
-                </div>
-              </nav>
-            </center>
-          </div>
-        </section>
-
-        <section className="search_result-grid">
-          <div className="row ">
-            <div className="container">
-              {newSearchResult.results &&
-              Object.keys(newSearchResult.results).length !== 0
-                ? newSearchResult.results.map((result) => {
-                    return (
-                      <div class="col s6 m4 l3">
-                        <CardHorizontal
-                          handleFetchVideo={this.handleFetchVideo}
-                          result={result}
-                        />
-                      </div>
-                    );
-                  })
-                : "No moview is found!!"}
-              <center>
-                {loader && loader.loading ? (
-                  <div class="progress">
-                    <div class="indeterminate"></div>
-                  </div>
-                ) : (
-                  ""
-                )}
-                <button onClick={this.handleShowMore}>Show More</button>
-              </center>
-            </div>
-          </div>
-        </section>
+        <SearchForm
+          renderOnChangeSearch={renderOnChangeSearch}
+          handleSearch={this.handleSearch}
+          title="Search Results"
+        />
+        <MovieGrid
+          newMovies={newSearchResult}
+          handleShowMore={this.handleShowMore}
+          loader={loader}
+          handleFetchVideo={this.handleFetchVideo}
+          handleSearch={this.handleSearch}
+        />
+        {loader && loader.login_modal_open ? (
+          <LoginModal
+            open={loader.login_modal_open}
+            handleCloseModal={this.handleCloseModal}
+          />
+        ) : (
+          ""
+        )}
       </React.Fragment>
     );
   }
@@ -128,6 +100,8 @@ const mapStateToProps = (state) => {
   }
 };
 
-export default connect(mapStateToProps, { fetchSearchResults, fetchVideo })(
-  reduxForm({ form: "searchSearchForm" })(Search)
-);
+export default connect(mapStateToProps, {
+  fetchSearchResults,
+  fetchVideo,
+  loginModalClose,
+})(reduxForm({ form: "searchSearchForm" })(Search));

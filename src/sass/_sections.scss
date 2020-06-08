@@ -3,7 +3,7 @@
   background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  height: 80vh;
+  height: 90vh;
   position: relative;
   display: flex;
 
@@ -40,4 +40,8 @@
 
 .movie_video-desc {
   padding: 0.5rem;
+}
+
+.login_section {
+  min-height: 70vh;
 }

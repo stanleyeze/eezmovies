@@ -5,6 +5,7 @@ import movieReducer from "./movieReducer";
 import { reducer as formReducer } from "redux-form";
 import videoReducer from "./videoReducer";
 import loaderReducer from "./loaderReducer";
+import favouriteReducer from "./favouriteReducer";
 
 export default combineReducers({
   auth: "",
@@ -14,4 +15,5 @@ export default combineReducers({
   form: formReducer,
   loader: loaderReducer,
   searchResult: searchResultsReducer,
+  favouriteItem: favouriteReducer,
 });

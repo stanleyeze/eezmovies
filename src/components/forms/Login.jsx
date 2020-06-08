@@ -24,6 +24,9 @@ class LoginForm extends Component {
     return (
       <div className="section login_section">
         <div className="z-depth-3 form">
+          <center>
+            <h5>Login</h5>
+          </center>
           <div className="form_login">
             <form onSubmit={this.props.handleSubmit(this.onSubmit)}>
               <Field

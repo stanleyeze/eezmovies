@@ -65,7 +65,8 @@ export const signinWithEmailAndPassword = (username, password) => async (
         type: SIGN_IN,
         payload: { username: res.username, isSignedIn: true },
       });
-      window.location = "/";
+      const location = history.location.pathname;
+      window.location = location;
     })
     .catch((err) => {
       console.log(err, "errorr");

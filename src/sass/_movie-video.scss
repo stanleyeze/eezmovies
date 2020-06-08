@@ -7,5 +7,20 @@
         justify-content: space-between;
       }
     }
+    &_back {
+      cursor: pointer;
+    }
+  }
+}
+
+.prelder {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .col-preloader {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

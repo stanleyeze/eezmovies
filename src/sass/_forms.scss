@@ -6,10 +6,25 @@
 }
 
 .form {
-  background-color: #263238;
+  background-color: white;
+  color: #37474f;
+  z-index: 1;
   padding: 1em;
   &_login {
     width: 25em;
     padding: 2rem;
+  }
+}
+
+.searchform {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &-form {
+    &_navwrapper {
+      background-color: #b0bec5;
+    }
   }
 }
